@@ -2,7 +2,7 @@
 
 基于 FastAPI + DeepSeek 的 LLM 应用示例，演示 **Function Calling（工具调用）** 的完整实现。
 
-## 项目简介
+## 一、项目简介
 
 这是一个生产级骨架的 LLM 应用，支持：
 
@@ -13,7 +13,7 @@
 - 每次工具调用落库（SQLite）用于审计
 - FastAPI 自动生成 Swagger 文档
 
-## 架构
+## 二、架构
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -54,7 +54,7 @@
 
 
 
-## 项目结构
+## 三、项目结构
 
 ```
 llm-chat-tools/
@@ -70,7 +70,7 @@ llm-chat-tools/
 
 
 
-## 快速开始
+## 四、快速开始
 
 ### 1. 安装依赖
 
@@ -100,9 +100,9 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 http://localhost:8000/docs
 ```
 
-## 使用示例
+## 五、使用示例
 
-### 查交易
+### 1. 查交易
 
 ```bash
 curl -X POST http://localhost:8000/chat/tools \
@@ -131,7 +131,7 @@ curl -X POST http://localhost:8000/chat/tools \
 
 
 
-### 查风控规则
+### 2. 查风控规则
 
 ```bash
 curl -X POST http://localhost:8000/chat/tools \
@@ -141,7 +141,7 @@ curl -X POST http://localhost:8000/chat/tools \
 
 
 
-## 技术亮点
+## 六、技术亮点
 
 ### 1. Function Calling 完整闭环
 
@@ -216,7 +216,7 @@ Pydantic 自动校验模型填的参数：
 
 工具调用循环有**轮次上限**，防止模型反复调同一工具。
 
-## 数据库查询
+## 七、数据库查询
 
 用 Python 查询落库记录：
 
@@ -241,7 +241,7 @@ SELECT tool_name, COUNT(*) FROM tool_calls GROUP BY tool_name;
 
 
 
-## 安全设计
+## 八、安全设计
 
 - **模型不执行函数**：执行权在程序手里
 - **参数强校验**：Pydantic 拦截非法输入
@@ -249,7 +249,7 @@ SELECT tool_name, COUNT(*) FROM tool_calls GROUP BY tool_name;
 - **落库审计**：可追溯
 - **只读优先**：当前示例工具都是查询，高风险操作（退款）需二次确认
 
-## 生产级扩展方向
+## 九、生产级扩展方向
 
 | 方向               | 说明                |
 | :----------------- | :------------------ |
@@ -262,7 +262,7 @@ SELECT tool_name, COUNT(*) FROM tool_calls GROUP BY tool_name;
 | 多厂商路由         | 按场景选不同模型    |
 | 单元测试           | pytest 覆盖核心逻辑 |
 
-## 技术栈
+## 十一、技术栈
 
 | 组件     | 用途                  |
 | :------- | :-------------------- |
@@ -273,7 +273,7 @@ SELECT tool_name, COUNT(*) FROM tool_calls GROUP BY tool_name;
 | SQLite   | 落库审计              |
 | DeepSeek | LLM 服务              |
 
-## 参考资料
+## 十二、参考资料
 
 - [FastAPI 官方文档](https://fastapi.tiangolo.com/)
 - [Pydantic 官方文档](https://docs.pydantic.dev/)
